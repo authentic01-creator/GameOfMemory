@@ -12,6 +12,7 @@ let timer;
 let timeLeft = 60;
 let gameStarted = false;
 let gamePaused = false;
+let canFlip = true; // Variável para controlar se cartas podem ser viradas
 
 function initGame() {
     matchedCards = [];
@@ -23,6 +24,8 @@ function initGame() {
     startTimer();
     gameStarted = true;
     gamePaused = false;
+    canFlip = true; // Permite virar cartas ao iniciar o jogo
+    document.getElementById('popup').classList.add('hidden'); // Oculta popup ao iniciar o jogo
 }
 
 function createBoard() {
@@ -53,10 +56,11 @@ function shuffle(array) {
 }
 
 function flipCard() {
-    if (!gameStarted || gamePaused) return; // Ignora cliques se o jogo não estiver iniciado ou estiver pausado
-    
+    if (!gameStarted || gamePaused || !canFlip) return; // Ignora cliques se o jogo não estiver iniciado, estiver pausado ou não puder virar cartas
+
     const selectedCard = this;
     const selectedId = selectedCard.getAttribute('data-id');
+
     if (cardIds.length === 2 || cardIds.includes(selectedId)) return;
 
     selectedCard.classList.add('flipped');
@@ -64,6 +68,7 @@ function flipCard() {
     cardValues.push(selectedCard.querySelector('img').src);
 
     if (cardIds.length === 2) {
+        canFlip = false; // Bloqueia a virada de novas cartas
         setTimeout(checkMatch, 500);
     }
 }
@@ -76,17 +81,24 @@ function checkMatch() {
     if (firstValue === secondValue) {
         matchedCards.push(firstId, secondId);
         document.getElementById('pairs-count').textContent = `Pares encontrados: ${matchedCards.length / 2}`;
-        if (matchedCards.length === cardValues.length) {
-            clearInterval(timer);
-            document.getElementById('congratulations').classList.remove('hidden');
-            document.getElementById('confetti').innerHTML = '<img src="images/confetti.gif" alt="Confetti">'; // Adicione um gif de confete ou similar
-        }
     } else {
-        cards[firstId].classList.remove('flipped');
-        cards[secondId].classList.remove('flipped');
+        // Se não houver correspondência, remove a classe 'flipped' das cartas
+        setTimeout(() => {
+            cards[firstId].classList.remove('flipped');
+            cards[secondId].classList.remove('flipped');
+        }, 500);
     }
+
     cardIds = [];
     cardValues = [];
+    canFlip = true; // Permite virar novas cartas
+
+    // Verifica se todos os pares foram encontrados
+    if (matchedCards.length === images.length) {
+        clearInterval(timer);
+        document.getElementById('popup-message').innerHTML = '<h2>Parabéns!</h2><p>Você encontrou todos os pares!</p>';
+        document.getElementById('popup').classList.remove('hidden');
+    }
 }
 
 function startTimer() {
@@ -94,8 +106,10 @@ function startTimer() {
     timer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(timer);
-            if (matchedCards.length !== cardValues.length) {
-                document.getElementById('popup-message').innerHTML = '<h2>Tempo Esgotado!</h2><p>Você não encontrou todos os pares.</p>';
+            // Remover mensagem de tempo esgotado
+            if (matchedCards.length === images.length) {
+                // Mostrar mensagem de vitória se todos os pares foram encontrados antes do tempo acabar
+                document.getElementById('popup-message').innerHTML = '<h2>Parabéns!</h2><p>Você encontrou todos os pares!</p>';
                 document.getElementById('popup').classList.remove('hidden');
             }
         } else {
