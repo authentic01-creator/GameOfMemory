@@ -9,10 +9,12 @@ body {
     min-height: 100vh; /* Garante que o rodapé fique na parte inferior da página */
 }
 
+
 h1 {
     margin: 20px 0;
-    color: #1E90FF; /* Azul claro */
+    color: #eaeaea; /* Azul claro */
 }
+
 
 #top-bar {
     display: flex;
@@ -23,25 +25,29 @@ h1 {
     border-bottom: 2px solid #333333; /* Cinza escuro para bordas */
 }
 
+
 #timer {
     font-size: 1.2em;
-    color: #1E90FF; /* Azul claro */
+    color: #8200e5; /* Azul claro */
 }
+
 
 #pause-btn {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
-    background-color: #2E3A59; /* Azul escuro */
+    background-color: #6005ce; /* Azul escuro */
     color: white;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
+
 #pause-btn:hover {
-    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+    background-color: #7008b5; /* Azul claro ao passar o mouse */
 }
+
 
 #game-board {
     display: grid;
@@ -53,6 +59,7 @@ h1 {
     box-sizing: border-box;
     max-width: 100%;
 }
+
 
 .card {
     width: 100%;
@@ -70,10 +77,12 @@ h1 {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
+
 .card:hover {
     transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra leve */
 }
+
 
 .card img {
     display: none;
@@ -82,31 +91,36 @@ h1 {
     object-fit: cover; /* Garante que a imagem se ajuste ao tamanho da carta */
 }
 
+
 .card.flipped img {
     display: block;
 }
+
 
 #start-btn {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
     margin: 20px;
-    background-color: #2E3A59; /* Azul escuro */
-    color: white;
+    background-color: #f0f0f0; /* Azul escuro */
+    color: rgb(136, 11, 152);
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
+
 #start-btn:hover {
-    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+    background-color: #9b76ac; /* Azul claro ao passar o mouse */
 }
+
 
 #pairs-count {
     font-size: 1.2em;
     margin: 20px;
-    color: #1E90FF; /* Azul claro */
+    color: #8907c1; /* Azul claro */
 }
+
 
 #popup {
     position: fixed;
@@ -124,31 +138,36 @@ h1 {
     border-radius: 8px;
 }
 
+
 .popup-content {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
+
 .hidden {
     display: none;
 }
+
 
 #popup-close {
     padding: 10px 20px;
     font-size: 1em;
     cursor: pointer;
     margin-top: 10px;
-    background-color: #2E3A59; /* Azul escuro */
+    background-color: #d60000; /* Azul escuro */
     color: white;
     border: none;
     border-radius: 5px;
     transition: background-color 0.3s ease;
 }
 
+
 #popup-close:hover {
-    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+    background-color: #ff1e1e; /* Azul claro ao passar o mouse */
 }
+
 
 /* Ajustes para dispositivos móveis */
 @media (max-width: 600px) {
@@ -157,20 +176,24 @@ h1 {
         align-items: center;
     }
 
+
     #game-board {
         grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Reduz o tamanho mínimo das cartas */
     }
+
 
     .card img {
         width: 70%;
         height: 70%;
     }
 
+
     #popup {
         width: 90%;
         max-width: none; /* Permite que o popup use 90% da largura da tela em dispositivos móveis */
     }
 }
+
 
 /* Estilo para o rodapé */
 footer {

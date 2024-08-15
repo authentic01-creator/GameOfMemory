@@ -74,6 +74,8 @@ function flipCard() {
 }
 
 function checkMatch() {
+    if (timeLeft <= 0) return; // Verifica se o tempo acabou antes de continuar
+
     const cards = document.querySelectorAll('.card');
     const [firstId, secondId] = cardIds;
     const [firstValue, secondValue] = cardValues;
@@ -106,12 +108,9 @@ function startTimer() {
     timer = setInterval(() => {
         if (timeLeft <= 0) {
             clearInterval(timer);
-            // Remover mensagem de tempo esgotado
-            if (matchedCards.length === images.length) {
-                // Mostrar mensagem de vitória se todos os pares foram encontrados antes do tempo acabar
-                document.getElementById('popup-message').innerHTML = '<h2>Parabéns!</h2><p>Você encontrou todos os pares!</p>';
-                document.getElementById('popup').classList.remove('hidden');
-            }
+            canFlip = false; // Bloqueia a virada de novas cartas quando o tempo acabar
+            document.getElementById('popup-message').innerHTML = '<h2>Tempo Esgotado!</h2><p>Você não encontrou todos os pares no tempo limite.</p>';
+            document.getElementById('popup').classList.remove('hidden');
         } else {
             timeLeft--;
             document.getElementById('timer').textContent = `Tempo restante: ${timeLeft}s`;
