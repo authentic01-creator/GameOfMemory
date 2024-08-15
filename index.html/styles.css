@@ -1,0 +1,187 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #0F0F0F; /* Preto escuro */
+    color: #E0E0E0; /* Cinza claro para texto */
+    margin: 0;
+    padding: 0;
+    position: relative; /* Necessário para o rodapé fixo */
+    min-height: 100vh; /* Garante que o rodapé fique na parte inferior da página */
+}
+
+h1 {
+    margin: 20px 0;
+    color: #1E90FF; /* Azul claro */
+}
+
+#top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #1F1F1F; /* Cinza escuro */
+    border-bottom: 2px solid #333333; /* Cinza escuro para bordas */
+}
+
+#timer {
+    font-size: 1.2em;
+    color: #1E90FF; /* Azul claro */
+}
+
+#pause-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #2E3A59; /* Azul escuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#pause-btn:hover {
+    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+}
+
+#game-board {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Ajusta o tamanho das cartas para telas menores */
+    gap: 10px;
+    justify-content: center;
+    margin: 20px auto;
+    padding: 10px;
+    box-sizing: border-box;
+    max-width: 100%;
+}
+
+.card {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    background-color: #1F1F1F; /* Cinza escuro */
+    border: 2px solid #333333; /* Cinza escuro para bordas */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px; /* Bordas arredondadas */
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05); /* Efeito de zoom ao passar o mouse */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra leve */
+}
+
+.card img {
+    display: none;
+    width: 80%;
+    height: 80%;
+    object-fit: cover; /* Garante que a imagem se ajuste ao tamanho da carta */
+}
+
+.card.flipped img {
+    display: block;
+}
+
+#start-btn {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 20px;
+    background-color: #2E3A59; /* Azul escuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#start-btn:hover {
+    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+}
+
+#pairs-count {
+    font-size: 1.2em;
+    margin: 20px;
+    color: #1E90FF; /* Azul claro */
+}
+
+#popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #1F1F1F; /* Cinza escuro */
+    border: 1px solid #333333; /* Cinza escuro para bordas */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    width: 80%;
+    max-width: 300px;
+    text-align: center;
+    border-radius: 8px;
+}
+
+.popup-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hidden {
+    display: none;
+}
+
+#popup-close {
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    margin-top: 10px;
+    background-color: #2E3A59; /* Azul escuro */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+#popup-close:hover {
+    background-color: #1E90FF; /* Azul claro ao passar o mouse */
+}
+
+/* Ajustes para dispositivos móveis */
+@media (max-width: 600px) {
+    #top-bar {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #game-board {
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Reduz o tamanho mínimo das cartas */
+    }
+
+    .card img {
+        width: 70%;
+        height: 70%;
+    }
+
+    #popup {
+        width: 90%;
+        max-width: none; /* Permite que o popup use 90% da largura da tela em dispositivos móveis */
+    }
+}
+
+/* Estilo para o rodapé */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1F1F1F; /* Cinza escuro */
+    color: #E0E0E0; /* Cinza claro para texto */
+    padding: 10px;
+    font-size: 0.9em; /* Tamanho pequeno para o rodapé */
+    text-align: center;
+    border-top: 1px solid #333333; /* Borda superior para o rodapé */
+}
